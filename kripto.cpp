@@ -1,25 +1,57 @@
 #include<iostream>
+#include<string.h>
 
 using namespace std;
 
-string sandi;
 int pilih;
 
-void caesar(){
+string caesar(string pesan){
+
+	int sandi, i;
+    string text, enskrip;
+    text = pesan;
+    
+    cout<<"\t Masukan Kunci enskrip  : ";
+    cin>>sandi;
+
+    for(i=0; i<text.size(); i++){
+        enskrip+=(text[i]-'A'+sandi) %26+'A';
+    }
+    return enskrip;
 
 }
-void vigenere(){
 
+string vigenere(string pesan){
+	string text , enskrip, key ;
+	int a =0;
+	text = pesan;
+	cout << "\t Masukan kata kunci enkripsi : "; cin >> key; cin.ignore();
+	
+	
+	for(int i = 0 ; i < text.size() ; i++){
+		
+		char x = (text[i] + key[a] ) % 26;
+		
+		x += 'A';
+		
+		enskrip.push_back(x);
+		if(a == key.size() - 1){
+			a = 0;
+		 }else{
+		 	a++;
+		 }
+	}
+	return  enskrip;
+	
 }
 
 int main(){
+ 	char loop = 'y';
+ 	string hasil,pesan;
+ 	
+ 	while(loop== 'y' || loop== 'Y'){
 
-    char loop;
-
-	while(loop=='y'||loop=='Y'){
-	system("cls");
 	
-
 	cout<<"\t\t\t"<<"+---------------------------------------------+"<<endl;
 	cout<<"\t\t\t"<<" ||    ~~~~~Project Akhir Algo Lanjut~~~~~  ||"<<endl;
 	cout<<"\t\t\t"<<"+---------------------------------------------+"<<endl;
@@ -34,15 +66,19 @@ int main(){
 	cout<<"\t\t\t"<<"==============================================="<<endl;
 	cout<<"\t\t\t"<<"\t1. Cesar Chiper "<<endl;
 	cout<<"\t\t\t"<<"\t2. Vigenere Chiper "<<endl;
-	cout<<"\t\t\t"<<"\t3.  "<<endl;
-	cout<<"\t\t\t"<<"\t4. Gabungan "<<endl;
+	cout<<"\t\t\t"<<"\t3. Rail Fense Chiper" <<endl;
+	cout<<"\t\t\t"<<"\t4. Super Enskripsi "<<endl;
 	cout<<"\t\t\t"<<"==============================================="<<endl<<endl;
 	cout<<"\t\t"<<"Masukan Pilihan : ";cin>>pilih;
+	cin.ignore();
+	cout<<"\t Masukan Pesan yang akan di enskrip : ";getline(cin,pesan);
 	
 	if(pilih==1){
-        caesar();
+        hasil = caesar(pesan);
+        cout<<"\t Hasi Enskrip Caesar adalah :  "<< hasil ;
 	}else if(pilih==2){
-		vigenere();
+		hasil = vigenere(pesan);
+		cout << "\t Hasil Enskripsi Vigenere : " << hasil;
 	}else if(pilih==3){
 		
 	}
@@ -52,7 +88,7 @@ int main(){
 	else{
 		cout<<endl<<"\t\t ~Pilin Menu 1-4~ "<<endl<<endl;
 	}
-	cout<<"\t\tKembali Kemenu Utama(y/t) : ";cin>>loop;
+	cout<<"\n \t Kembali ke menu utama (yes/no) : " ; cin>>loop; 
 	}
 }
     
